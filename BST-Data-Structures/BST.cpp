@@ -1,6 +1,6 @@
 #include "BST.h"
 
-// constructor
+/* The constructor for the BST class. */
 template<typename T>
 inline BST<T>::BST()
 {
@@ -9,10 +9,11 @@ inline BST<T>::BST()
 }
 
 // destory
+/* Deleting the tree. */
 template<typename T>
 void BST<T>::destroy(TreeNode<T>*)
 {
-// iterative
+	// iterative,(P.S. recursion was too slow)
 	TreeNode<T>* curr = root;
 	TreeNode<T>* temp;
 	while (curr != nullptr)
@@ -33,6 +34,7 @@ void BST<T>::destroy(TreeNode<T>*)
 }
 
 // destructor
+/* The destructor for the BST class. */
 template<typename T>
 BST<T>::~BST()
 {
@@ -40,17 +42,22 @@ BST<T>::~BST()
 }
 
 // insert
+/* Inserting a node into the tree. */
 template<typename T>
-void BST<T>::insertHelper(TreeNode<T>* &root, T data)
+void BST<T>::insertHelper(TreeNode<T>*& root, T data)
 {
-	// tree is empty
+	/* This is checking if the root is nullptr, if it is, it will create a new node with the data and
+	return. */
 	if (root == nullptr)
 	{
 		root = new TreeNode<T>(data);
 		size++;
 		return;
 	}
-	// data is less than the root, go left
+
+	/* This is checking if the data is less than the root, if it is, it will check if the left node is
+	nullptr. If it is, it will create a new node with the data and return. If it is not, it will call
+	the insertHelper function again with the left node. */
 	if (data < root->data)
 	{
 		if (root->left == nullptr)
@@ -66,7 +73,10 @@ void BST<T>::insertHelper(TreeNode<T>* &root, T data)
 			insertHelper(root->left, data);
 		}
 	}
-	// data is greater than the root, go right
+
+	/* This is checking if the data is greater than the root, if it is, it will check if the right node is
+	nullptr. If it is, it will create a new node with the data and return. If it is not, it will call
+	the insertHelper function again with the right node. */
 	else if (data > root->data)
 	{
 		if (root->right == nullptr)
@@ -89,6 +99,7 @@ void BST<T>::insertHelper(TreeNode<T>* &root, T data)
 	}
 }
 
+/* This is the insert function. It is calling the insertHelper function with the root and the data. */
 template<typename T>
 void BST<T>::insert(T data)
 {
@@ -99,8 +110,9 @@ void BST<T>::insert(T data)
 template<typename T>
 void BST<T>::removeHelper(TreeNode<T>*& root, T data)
 {
-	// remove function
-	// if data is root's data and root has no children
+	/* This is checking if the root is equal to the data and if the left and right nodes are nullptr. If
+	they are, it will delete the root and set it to nullptr. It will also decrease the size by one and
+	return. */
 	if (root->data == data && root->left == nullptr && root->right == nullptr)
 	{
 		delete root;
@@ -109,6 +121,7 @@ void BST<T>::removeHelper(TreeNode<T>*& root, T data)
 		return;
 	}
 
+	/* This is checking if the root is nullptr. If it is, it will return. */
 	if (root == nullptr)
 	{
 		return;
@@ -126,17 +139,18 @@ void BST<T>::removeHelper(TreeNode<T>*& root, T data)
 	// data is equal to the root, remove it
 	else
 	{
-		// node has no children
+		/* This is checking if the root has no children. If it does not, it will delete the root and set it
+		to nullptr. It will also decrease the size by one and return. */
 		if (root->left == nullptr && root->right == nullptr)
 		{
-			// remove parent
-			
 			delete root;
 			root = nullptr;
 			size--;
 			return;
 		}
-		// node has one child
+
+		/* Checking if the root has one child. If it does, it will delete the root and set the root to the
+		child. It will also decrease the size by one and return. */
 		else if (root->left == nullptr)
 		{
 			TreeNode<T>* temp = root;
@@ -154,6 +168,7 @@ void BST<T>::removeHelper(TreeNode<T>*& root, T data)
 			return;
 		}
 		// node has two children
+		/* Finding the smallest value in the right subtree and replacing the root with that value. */
 		else
 		{
 			TreeNode<T>* temp = root->right;
@@ -165,27 +180,28 @@ void BST<T>::removeHelper(TreeNode<T>*& root, T data)
 			removeHelper(root->right, temp->data);
 		}
 	}
-	
 }
 
+/* This is the remove function. It is calling the removeHelper function with the root and the data. */
 template<typename T>
 void BST<T>::remove(T data)
 {
-	// write remove using recursion
 	removeHelper(root, data);
 }
 
+/* Calling the removeHelper function with the root and the it. */
 template<typename T>
 void BST<T>::remove(TreeNode<T>* it)
 {
 	removeHelper(root, it);
-
 }
 
+/* Removing a node from the tree. */
 template<typename T>
 void BST<T>::removeHelper(TreeNode<T>*& root, TreeNode<T>* it)
 {
-	if(root == nullptr || it == nullptr)
+	/* Checking if the root or the it is nullptr. If it is, it will return. */
+	if (root == nullptr || it == nullptr)
 	{
 		return;
 	}
@@ -241,6 +257,7 @@ void BST<T>::removeHelper(TreeNode<T>*& root, TreeNode<T>* it)
 		}
 	}
 }
+
 // inorder
 template<typename T>
 void BST<T>::inorder()
@@ -289,7 +306,7 @@ void BST<T>::postorder()
 }
 
 template<typename T>
-void BST<T>::postorderHelper(TreeNode<T>*root)
+void BST<T>::postorderHelper(TreeNode<T>* root)
 {
 	// write postorder using recursion
 	if (root == nullptr)
@@ -315,10 +332,6 @@ TreeNode<T>* BST<T>::searchHelper(TreeNode<T>* root, T data)
 	if (root == nullptr) return 0;
 	if (root->data == data) return root;
 
-	if (root == nullptr)
-	{
-		return 0;
-	}
 	if (data < root->data)
 	{
 		return searchHelper(root->left, data);
