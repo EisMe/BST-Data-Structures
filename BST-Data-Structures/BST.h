@@ -9,10 +9,19 @@ class BST
 {
 	friend TreeNode<T>;
 public:
-
+	//constructor
 	BST();
+	
+	// destructor
 	~BST();
 	void destroy(TreeNode<T>*);
+
+	// copy constructor
+	BST(const BST<T>&);
+	void copy(TreeNode<T>*&, TreeNode<T>*);
+
+	// assignment operator
+	BST<T>& operator=(const BST<T>&);
 
 	// insert
 	void insert(T);

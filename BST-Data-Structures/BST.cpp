@@ -8,6 +8,47 @@ inline BST<T>::BST()
 	size = 0;
 }
 
+// copy constructor
+template<typename T>
+BST<T>::BST(const BST<T>& original)
+{
+	root = nullptr;
+	size = 0;
+	copy(root, original.root);
+}
+
+// assignment operator
+template<typename T>
+BST<T>& BST<T>::operator=(const BST<T>& rhs)
+{
+	if (this != &rhs)
+	{
+		destroy(root);
+		copy(root, rhs.root);
+	}
+	return *this;
+}
+
+
+// copy helper function
+template<typename T>
+void BST<T>::copy(TreeNode<T>*& root, TreeNode<T>* original)
+{
+	// if the original is nullptr, return
+	if (original == nullptr)
+	{
+		return;
+	}
+	// create a new node with the same data
+	else
+	{
+		insert(original->data);
+		copy(root->left, original->left);
+		copy(root->right, original->right);
+	}
+}
+
+
 // destory
 /* Deleting the tree. */
 template<typename T>
@@ -99,7 +140,6 @@ void BST<T>::insertHelper(TreeNode<T>*& root, T data)
 	}
 }
 
-/* This is the insert function. It is calling the insertHelper function with the root and the data. */
 template<typename T>
 void BST<T>::insert(T data)
 {
@@ -182,7 +222,7 @@ void BST<T>::removeHelper(TreeNode<T>*& root, T data)
 	}
 }
 
-/* This is the remove function. It is calling the removeHelper function with the root and the data. */
+/* remove function. It is calling the removeHelper function with the root and the data. */
 template<typename T>
 void BST<T>::remove(T data)
 {
