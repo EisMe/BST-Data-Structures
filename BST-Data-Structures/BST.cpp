@@ -17,19 +17,6 @@ BST<T>::BST(const BST<T>& original)
 	copy(root, original.root);
 }
 
-// assignment operator
-template<typename T>
-BST<T>& BST<T>::operator=(const BST<T>& rhs)
-{
-	if (this != &rhs)
-	{
-		destroy(root);
-		copy(root, rhs.root);
-	}
-	return *this;
-}
-
-
 // copy helper function
 template<typename T>
 void BST<T>::copy(TreeNode<T>*& root, TreeNode<T>* original)
@@ -49,11 +36,29 @@ void BST<T>::copy(TreeNode<T>*& root, TreeNode<T>* original)
 }
 
 
+// assignment operator
+template<typename T>
+BST<T>& BST<T>::operator=(const BST<T>& rhs)
+{
+	if (this != &rhs)
+	{
+		destroy(root);
+		copy(root, rhs.root);
+	}
+	return *this;
+}
+
+
 // destory
 /* Deleting the tree. */
 template<typename T>
 void BST<T>::destroy(TreeNode<T>*)
 {
+	// check if the tree is empty
+	if(root == nullptr)
+	{
+		return;
+	}
 	// iterative,(P.S. recursion was too slow)
 	TreeNode<T>* curr = root;
 	TreeNode<T>* temp;
@@ -134,10 +139,8 @@ void BST<T>::insertHelper(TreeNode<T>*& root, T data)
 		}
 	}
 	// data is equal to the root, do nothing
-	else
-	{
+	
 		return;
-	}
 }
 
 template<typename T>

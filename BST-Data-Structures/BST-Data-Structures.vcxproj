@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BST-Data-Structures.cpp" />
+    <ClCompile Include="Driver.cpp" />
     <ClCompile Include="BST.cpp" />
   </ItemGroup>
   <ItemGroup>
