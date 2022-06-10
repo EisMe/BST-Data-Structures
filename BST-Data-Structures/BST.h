@@ -4,7 +4,7 @@
 using namespace std;
 
 // class BST
-template<typename T>
+template<typename T> 
 class BST
 {
 	friend TreeNode<T>;
@@ -28,30 +28,30 @@ public:
 	void insertHelper(TreeNode<T>*&, T);
 
 	// remove
-	void remove(T data);
+	void remove(T);
 	void remove(TreeNode<T>*);
 	void removeHelper(TreeNode<T>*&, T);
 	void removeHelper(TreeNode<T>*&, TreeNode<T>*);
 
 	// inorder
-	void inorder();
-	void inorderHelper(TreeNode<T>*);
+	void inorder()const;
+	void inorderHelper(TreeNode<T>*)const;
 
 	// preorder
-	void preorder();
-	void preorderHelper(TreeNode<T>*);
+	void preorder()const;
+	void preorderHelper(TreeNode<T>*)const;
 
 	// postorder
-	void postorder();
-	void postorderHelper(TreeNode<T>*);
+	void postorder()const;
+	void postorderHelper(TreeNode<T>*)const;
 
 	// search
-	TreeNode<T>* search(T data);
-	TreeNode<T>* searchHelper(TreeNode<T>*, T);
+	TreeNode<T>* search(T)const;
+	TreeNode<T>* searchHelper(TreeNode<T>*, T)const;
 
 	// preorder print
-	void print();
-	void printHelper(TreeNode<T>*);
+	void print()const;
+	void printHelper(TreeNode<T>*)const;
 
 private:
 	TreeNode<T>* root;

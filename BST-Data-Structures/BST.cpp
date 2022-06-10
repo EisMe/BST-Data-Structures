@@ -35,7 +35,6 @@ void BST<T>::copy(TreeNode<T>*& root, TreeNode<T>* original)
 	}
 }
 
-
 // assignment operator
 template<typename T>
 BST<T>& BST<T>::operator=(const BST<T>& rhs)
@@ -48,14 +47,13 @@ BST<T>& BST<T>::operator=(const BST<T>& rhs)
 	return *this;
 }
 
-
 // destory
 /* Deleting the tree. */
 template<typename T>
 void BST<T>::destroy(TreeNode<T>*)
 {
 	// check if the tree is empty
-	if(root == nullptr)
+	if (root == nullptr)
 	{
 		return;
 	}
@@ -139,8 +137,8 @@ void BST<T>::insertHelper(TreeNode<T>*& root, T data)
 		}
 	}
 	// data is equal to the root, do nothing
-	
-		return;
+
+	return;
 }
 
 template<typename T>
@@ -303,13 +301,13 @@ void BST<T>::removeHelper(TreeNode<T>*& root, TreeNode<T>* it)
 
 // inorder
 template<typename T>
-void BST<T>::inorder()
+void BST<T>::inorder()const
 {
 	inorderHelper(root);
 }
 
 template<typename T>
-void BST<T>::inorderHelper(TreeNode<T>* root)
+void BST<T>::inorderHelper(TreeNode<T>* root)const
 {
 	// write inorder using recursion
 	if (root == nullptr)
@@ -323,13 +321,13 @@ void BST<T>::inorderHelper(TreeNode<T>* root)
 
 // preorder
 template<typename T>
-void BST<T>::preorder()
+void BST<T>::preorder()const
 {
 	preorderHelper(root);
 }
 
 template<typename T>
-void BST<T>::preorderHelper(TreeNode<T>* root)
+void BST<T>::preorderHelper(TreeNode<T>* root)const
 {
 	// write preorder using recursion
 	if (root == nullptr)
@@ -343,13 +341,13 @@ void BST<T>::preorderHelper(TreeNode<T>* root)
 
 // postorder
 template<typename T>
-void BST<T>::postorder()
+void BST<T>::postorder()const
 {
 	postorderHelper(this->root);
 }
 
 template<typename T>
-void BST<T>::postorderHelper(TreeNode<T>* root)
+void BST<T>::postorderHelper(TreeNode<T>* root)const
 {
 	// write postorder using recursion
 	if (root == nullptr)
@@ -363,13 +361,13 @@ void BST<T>::postorderHelper(TreeNode<T>* root)
 
 // search
 template<typename T>
-TreeNode<T>* BST<T>::search(T data)
+TreeNode<T>* BST<T>::search(T data)const
 {
 	return searchHelper(this->root, data);
 }
 
 template<typename T>
-TreeNode<T>* BST<T>::searchHelper(TreeNode<T>* root, T data)
+TreeNode<T>* BST<T>::searchHelper(TreeNode<T>* root, T data)const
 {
 	// write search using recursion
 	if (root == nullptr) return 0;
@@ -383,17 +381,21 @@ TreeNode<T>* BST<T>::searchHelper(TreeNode<T>* root, T data)
 	{
 		return searchHelper(root->right, data);
 	}
+	else
+	{
+		return 0;
+	}
 }
 
 // print
 template<typename T>
-void BST<T>::print()
+void BST<T>::print()const
 {
 	printHelper(root);
 }
 
 template<typename T>
-void BST<T>::printHelper(TreeNode<T>* root)
+void BST<T>::printHelper(TreeNode<T>* root)const
 {
 	preorderHelper(root);
 }
