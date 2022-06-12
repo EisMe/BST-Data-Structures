@@ -26,6 +26,7 @@ public:
 	// insert
 	void insert(T);
 	void insertHelper(TreeNode<T>*&, T);
+	void copyInsertHelper(TreeNode<T>*& , T);
 
 	// remove
 	void remove(T);

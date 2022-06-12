@@ -29,7 +29,7 @@ void BST<T>::copy(TreeNode<T>*& root, TreeNode<T>* original)
 	// create a new node with the same data
 	else
 	{
-		insert(original->data);
+		copyInsertHelper(root, original->data);
 		copy(root->left, original->left);
 		copy(root->right, original->right);
 	}
@@ -139,6 +139,16 @@ void BST<T>::insertHelper(TreeNode<T>*& root, T data)
 	// data is equal to the root, do nothing
 
 	return;
+}
+
+// insert helper specificlly for the copy constructor
+// it doesn't compare the data, it just inserts the data
+template<typename T>
+void BST<T>::copyInsertHelper(TreeNode<T>*& root, T data)
+{
+		root = new TreeNode<T>(data);
+		size++;
+		return;
 }
 
 template<typename T>

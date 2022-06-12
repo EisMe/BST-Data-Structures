@@ -15,10 +15,10 @@ int main()
 	bst.insert(13); // inserting value twice does nothing.
 	bst.insert(22);
 	bst.insert(12);
-	
+
 	// keep the original
 	BST<int> bst_m(bst);
-	
+
 	/* tree looks like this:
 			 11
 			/ \
@@ -28,42 +28,48 @@ int main()
 		2   9   / \
 			   12  \
 					17
-				     \
-				      22
-	
+					 \
+					  22
+
 	*/
 
 #pragma endregion
-	
+
 #pragma region test
-	
+
+	cout << "----------------------\nPrinting the tree\n----------------------" << endl;
+
 	// testing functions
 	bst.print();
+	cout << endl;
 	// expected outcome:
 	//	11, 7, 2, 9, 13, 12, 27, 22
 
 	// testing search
+	cout << endl << "----------------------\nTesting search\n----------------------";
+
 	cout << "\nSearching for 13: ";
 	auto it = bst.search(13);
-	if(it != nullptr)
+	if (it != nullptr)
 		cout << "Found 13 at " << it << endl;
 	else
 		cout << "13 not found" << endl;
-	
+
 #pragma region test_remove
+	cout << endl << "----------------------\nRemoving 22 and 11 \n----------------------" << endl;
+
 	// testing remove
 	bst.remove(22);
-	bst.print();
-	cout << endl;
 	// expected outcome:
 	//	11, 7, 2, 9, 12, 17
 
 	// testing remove on the root
 	bst.remove(11);
+	cout << "Tree after removal: ";
 	bst.print();
 	cout << endl;
 	// expected outcome:
-	//	12, 7, 2, 9, 13, 17 
+	//	12, 7, 2, 9, 13, 17
 
 #pragma endregion
 
@@ -73,7 +79,7 @@ int main()
 	cout << "\nCopied tree: ";
 	bst2.print();
 	// expected outcome:
-	//	12, 7, 2, 9, 13, 17 
+	//	12, 7, 2, 9, 13, 17
 	cout << endl;
 
 	// testing assignment operator
@@ -85,30 +91,33 @@ int main()
 	//	12, 7, 2, 9, 13, 17
 	cout << endl;
 #pragma endregion
-	
+
 #pragma region traverse
+	cout << endl << "----------------------\nTesting traverse operations\n----------------------" << endl;
+	cout << "The tree: ";
+	bst_m.print();
+	cout << endl;
 	// testing all traverse functions
 	cout << "\nPreorder: ";
 	bst_m.preorder();
 	cout << endl;
 	// expected outcome:
 	//	11, 7, 2, 9, 13, 12, 17, 22
-	
+
 	cout << "\nInorder: ";
 	bst_m.inorder();
 	cout << endl;
 	// expected outcome:
 	//	2, 7, 9, 11, 12, 13, 17, 22
-	
+
 	cout << "\nPostorder: ";
 	bst_m.postorder();
 	cout << endl;
 	// expected outcome:
 	//	2, 9, 7, 12, 22, 17, 13, 11
-	
-	
+
 #pragma endregion
-	
+
 #pragma endregion test
 	return 0;
 }
